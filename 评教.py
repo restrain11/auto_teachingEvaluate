@@ -4,23 +4,25 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 #为了学习，我在下面即使用了XPath也使用了Selector。
 
 # 配置 ChromeDriver 路径并启动浏览器
 options = Options()#设置浏览器启动选项。
-chromedriver_path = r"C:\Users\restrain\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32\chromedriver.exe"#指定ChromeDriver路径。
-service = Service(chromedriver_path)#加载ChromeDriver服务。
+
+# 手动配置chromedriver路径
+# chromedriver_path = r"C:\Users\restrain\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32\chromedriver.exe"#指定ChromeDriver路径。
+# service = Service(chromedriver_path) #加载ChromeDriver服务。
 
 #如果不知道自己电脑的chromedriver的路径在哪，也可以用下面代码自动下载。
-#service = Service(ChromeDriverManager().install())  # 自动下载与当前 Chrome 版本匹配的驱动
-
-driver = webdriver.Chrome(service=service, options=options)# 启动Chrome浏览器。
-driver.implicitly_wait(20)#隐式等待，找不到元素时会等待20秒。
+service = Service(ChromeDriverManager().install())  # 自动下载与当前 Chrome 版本匹配的驱动
 
 #当然如果你想用edge也可以，类比上面的代码即可。
 # service = Service(EdgeChromiumDriverManager().install())  # 自动下载与 Edge 版本匹配的驱动
-# driver = webdriver.Edge(service=service, options=options)  # 启动 Edge 浏览器
+
+driver = webdriver.Chrome(service=service, options=options)# 启动浏览器。
+driver.implicitly_wait(20)#隐式等待，找不到元素时会等待20秒。
 
 try:
     # 打开登录页面
@@ -34,10 +36,10 @@ try:
 
     WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, '//input[@placeholder="请输入用户名"]')))#等待用户名输入框出现。
     username_input = driver.find_element(By.XPATH, '//input[@placeholder="请输入用户名"]')#获取用户名输入框
-    username_input.send_keys("2207020610")  # 替换为你的用户名
+    username_input.send_keys("你的用户名")  # 替换为你的用户名
 
     password_input = driver.find_element(By.XPATH, '//input[@placeholder="请输入密码"]')#获取密码输入框
-    password_input.send_keys("Fyz19833867624")  # 替换为你的密码
+    password_input.send_keys("你的密码")  # 替换为你的密码
 
     # 找到登录按钮并点击
     login_button = driver.find_element(By.XPATH, '//button[contains(@class, "van-button")]')#获取登录按钮
