@@ -1,0 +1,23 @@
+# Ignore IDE-specific files
+.idea/
+
+# Ignore specific folders
+开发笔记.assets/
+
+# Ignore specific files
+开发笔记.md
+
+# Common OS-specific files
+.DS_Store
+Thumbs.db
+
+# Common logs
+*.log
+
+# Python cache files (if applicable)
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Node.js dependencies (if applicable)
+node_modules/
